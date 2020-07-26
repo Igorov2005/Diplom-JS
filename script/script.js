@@ -138,47 +138,27 @@ sendForm();
 
 //Аккордеон 1я форма
 const accordionForm = () => {
-  let clicked = ''; //переменная для сохранения закрывающегося элемента
-  document.addEventListener('click', e => {
-    // const targetId = e.target.getElementById('#accordion-two') || ''; // достаем id элемента
-    const targetId = e.targetconst.getAttribute('accordion-two') || '';
-    if (!targetId)
 
-      return // если его нет, выходим из скрипта
+  const panelHeading = document.querySelectorAll('.panel-heading'),
+    panelBody = document.querySelectorAll('.panel-body');
 
-    const target = document.getElementById(targetId); // ссылка на сам элемент
+  for (let i = 0; i < panelHeading.length; i++) {
+    panelHeading[i].onclick = function () {
+      for (let x = 0; x < panelBody.length; x++) {
+        panelBody[x].classList.remove('show')
+      }
+      this.nextElementSibling.classList.toggle('show');
+    }
+  }
 
-    if (clicked && clicked !== target) clicked.classList.remove('open');
 
-    //если это не первое открытие и не 2ой раз открывается текущий, то скрываем
-    target.classList.add('open');
 
-    clicked = target //сохраняем ссылку в замыкании
-  });
 };
 accordionForm();
 
-//Конструктор-калькулятор в виде аккордеона 
-
-const accordionCalc = () => {
-  let clicked = '';
-  document.addEventListener('click', e => {
-    const targetId = e.target.getElementById('accordion') || '';
-
-    if (!targetId)
-
-      return
-
-    const target = document.getElementById(targetId);
-
-    if (clicked && clicked !== target) clicked.classList.remove('open');
+//Kалькулятор
 
 
-    target.classList.add('open');
-
-    clicked = target
-  });
-};
 
 
-accordionCalc();
+
